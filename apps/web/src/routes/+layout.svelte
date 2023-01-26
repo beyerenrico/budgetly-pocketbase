@@ -1,10 +1,11 @@
 <script>
+	import { getImageURL } from '$lib/utils';
 	import '../app.postcss';
 
 	export let data;
 </script>
 
-<div class="min-h-full">
+<div class="min-h-screen flex flex-col">
 	<nav class="navbar bg-base-100 border-b">
 		<div class="flex-1">
 			<a href="/" class="btn btn-ghost normal-case text-xl">budgetly</a>
@@ -24,7 +25,13 @@
 					<!-- svelte-ignore a11y-label-has-associated-control -->
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 						<div class="w-10 rounded-full">
-							<img src="https://placeimg.com/80/80/people" alt="User avatar" />
+							<img
+								src={data.user?.avatar
+									? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar)
+									: `https://ui-avatars.com/api/?name=${data.user?.name}`}
+								alt="{data.user?.name}'s Avatar"
+								id="avatar-preview"
+							/>
 						</div>
 					</label>
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -48,9 +55,14 @@
 			{/if}
 		</div>
 	</nav>
-	<div class="py-10">
+	<main class="py-4 h-full flex-grow">
 		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-			<slot>No content to display</slot>
+			<slot />
 		</div>
-	</div>
+	</main>
+	<footer class="footer footer-center p-4 bg-base-300 text-base-content">
+		<div>
+			<p>Copyright © 2023 - All right reserved by Budgetly</p>
+		</div>
+	</footer>
 </div>
