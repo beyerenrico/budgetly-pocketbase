@@ -1,5 +1,6 @@
 <script>
 	export let value = '';
+	export let classes = '';
 	export let placeholder = '';
 	export let id = '';
 	export let label = '';
@@ -8,18 +9,20 @@
 	export let required = false;
 </script>
 
-<div class="form-control w-full max-w-lg mb-2">
-	<label for={id} class="label font-medium pb-1">
-		<span class="label-text">{label}</span>
-	</label>
-	<input
-		class="input input-bordered w-full max-w-lg"
-		name={id}
-		{type}
-		{placeholder}
-		{disabled}
-		{required}
-		{id}
-		{value}
-	/>
+<div class={classes}>
+	<div class="form-control w-full max-w-lg mb-2">
+		<label for={id} class="label font-medium pb-1">
+			<span class="label-text">{label}</span>
+		</label>
+		<input
+			class="input input-bordered w-full max-w-lg"
+			name={id}
+			{type}
+			{placeholder}
+			{disabled}
+			{required}
+			{id}
+			{value}
+		/>
+	</div>
 </div>
