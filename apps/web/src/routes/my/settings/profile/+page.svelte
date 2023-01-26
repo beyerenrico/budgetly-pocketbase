@@ -22,7 +22,7 @@
 		}
 	};
 
-	const submitUpdateProfile = ({ data }) => {
+	const submitUpdateProfile = () => {
 		loading = true;
 
 		return async ({ result, update }) => {
@@ -41,6 +41,8 @@
 			update();
 		};
 	};
+
+	$: ({ avatar, name, collectionId, id } = data.user);
 </script>
 
 <div class="flex flex-col w-full h-full">
@@ -65,10 +67,10 @@
 				</label>
 				<div class="w-32 rounded-full">
 					<img
-						src={data.user?.avatar
-							? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar)
-							: `https://ui-avatars.com/api/?name=${data.user?.name}`}
-						alt="{data.user?.name}'s Avatar"
+						src={avatar
+							? getImageURL(collectionId, id, avatar)
+							: `https://ui-avatars.com/api/?name=${name}`}
+						alt="{name}'s Avatar"
 						id="avatar-preview"
 					/>
 				</div>
@@ -84,13 +86,7 @@
 				disabled={loading}
 			/>
 		</div>
-		<Input
-			id="name"
-			label="Name"
-			placeholder="Enter your name"
-			value={form?.data?.name ?? data?.user?.name}
-			disabled={loading}
-		/>
+		<Input id="name" label="Name" placeholder={name} value={name} disabled={loading} />
 		<div class="w-full max-w-lg pt-3">
 			<button type="submit" class="btn btn-primary w-full max-w-lg" disabled={loading}
 				>Update Profile</button

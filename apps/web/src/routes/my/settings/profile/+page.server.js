@@ -1,3 +1,4 @@
+import { serializeNonPOJOs } from '$lib/utils';
 import { error } from '@sveltejs/kit';
 
 /** @type {import('./$types').Actions} */

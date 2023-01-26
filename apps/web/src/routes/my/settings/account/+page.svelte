@@ -56,6 +56,8 @@
 			update();
 		};
 	};
+
+	$: ({ email, username } = data.user);
 </script>
 
 <div class="flex flex-col w-full h-full space-y-12">
@@ -71,8 +73,8 @@
 					type="email"
 					label="Enter your new email address"
 					required={true}
-					placeholder={data.user?.email}
-					value={form?.data?.email}
+					placeholder={email}
+					value={email}
 					disabled={loading}
 				/>
 				<button type="submit" class="btn btn-primary w-full" disabled={loading}>Change email</button
@@ -90,12 +92,7 @@
 		<h3 class="text-2xl font-medium">Change Username</h3>
 		<div class="divider -mb-0.5" />
 		<div class="mb-3">
-			<Input
-				id="currentUsername"
-				label="Your current username"
-				value={data?.user?.username}
-				disabled
-			/>
+			<Input id="currentUsername" label="Your current username" value={username} disabled />
 		</div>
 		<Modal label="change-username" checked={usernameModalOpen}>
 			<span slot="trigger" class="btn btn-primary">Change Username</span>
@@ -111,7 +108,8 @@
 					type="text"
 					label="Enter your new username"
 					required={true}
-					placeholder={data.user?.username}
+					placeholder={username}
+					value={username}
 					disabled={loading}
 				/>
 				<button type="submit" class="btn btn-primary w-full" disabled={loading}
