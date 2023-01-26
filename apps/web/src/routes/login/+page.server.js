@@ -9,13 +9,19 @@ export const actions = {
 			await locals.pb.collection('users').authWithPassword(body.email, body.password);
 			if (!locals.pb?.authStore?.model?.verified) {
 				locals.pb.authStore.clear();
+
 				return {
-					notVerified: true
+					type: 'error',
+					message: 'You must verify your email before you can login'
 				};
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Something went wrong logging in');
+
+			return {
+				type: 'error',
+				message: err.message
+			};
 		}
 
 		throw redirect(303, '/');

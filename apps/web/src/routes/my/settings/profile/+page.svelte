@@ -1,7 +1,7 @@
 <script>
 	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
-	import Input from '$lib/components/Input.svelte';
+	import { Alert, Input } from '$lib/components';
 	import { getImageURL } from '$lib/utils';
 	import { Icon, Pencil } from 'svelte-hero-icons';
 
@@ -11,7 +11,6 @@
 	let loading = false;
 
 	const showPreview = (event) => {
-		console.log(event);
 		const target = event.target;
 		const files = target.files;
 
@@ -20,14 +19,13 @@
 			const preview = document.getElementById('avatar-preview');
 
 			preview.src = src;
-			console.log(preview.src);
 		}
 	};
 
-	const submitUpdateProfile = () => {
+	const submitUpdateProfile = ({ data }) => {
 		loading = true;
 
-		return async ({ result }) => {
+		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'success':
 					await invalidateAll();
@@ -40,6 +38,7 @@
 			}
 
 			loading = false;
+			update();
 		};
 	};
 </script>
@@ -89,7 +88,7 @@
 			id="name"
 			label="Name"
 			placeholder="Enter your name"
-			value={data?.user?.name}
+			value={form?.data?.name ?? data?.user?.name}
 			disabled={loading}
 		/>
 		<div class="w-full max-w-lg pt-3">
@@ -97,24 +96,10 @@
 				>Update Profile</button
 			>
 		</div>
-		{#if form?.success}
-			<div class="alert alert-success shadow-lg w-full max-w-lg">
-				<div>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="stroke-current flex-shrink-0 h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-						/></svg
-					>
 
-					<span>Your profile has been updated</span>
-				</div>
+		{#if form?.type}
+			<div class="pt-4">
+				<Alert type={form?.type}>{form?.message}</Alert>
 			</div>
 		{/if}
 	</form>

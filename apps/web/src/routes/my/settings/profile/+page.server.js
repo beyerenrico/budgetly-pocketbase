@@ -21,7 +21,8 @@ export const actions = {
 		}
 
 		return {
-			success: true
+			type: 'success',
+			message: 'Your profile has been updated'
 		};
 	}
 };

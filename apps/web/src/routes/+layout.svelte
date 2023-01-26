@@ -1,8 +1,17 @@
 <script>
-	import { getImageURL } from '$lib/utils';
 	import '../app.postcss';
 
+	import { Alert } from '$lib/components';
+	import { getImageURL } from '$lib/utils';
+	import { page } from '$app/stores';
+
 	export let data;
+
+	let type;
+	let message;
+
+	$: type = $page.url.searchParams.get('type');
+	$: message = $page.url.searchParams.get('message');
 </script>
 
 <div class="min-h-screen flex flex-col">
@@ -56,6 +65,11 @@
 		</div>
 	</nav>
 	<main class="py-4 h-full flex-grow">
+		{#if type && message}
+			<div class="mx-auto max-w-lg pb-8">
+				<Alert {type}>{message}</Alert>
+			</div>
+		{/if}
 		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 			<slot />
 		</div>

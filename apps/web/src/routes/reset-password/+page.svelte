@@ -1,4 +1,6 @@
 <script>
+	import { Alert, Input } from '$lib/components';
+
 	export let form;
 </script>
 
@@ -12,39 +14,12 @@
 		method="POST"
 		class="flex flex-col items-center space-y-2 w-full pt-4"
 	>
-		<div class="form-control w-full max-w-md">
-			<label for="email" class="label font-medium pb-1">
-				<span class="label-text">Email</span>
-			</label>
-			<input
-				type="email"
-				name="email"
-				placeholder="john.doe@mail.com"
-				class="input input-bordered w-full max-w-md"
-			/>
-		</div>
-		<div class="w-full max-w-md pt-2">
+		<Input type="email" id="email" label="Email" placeholder="john.doe@mail.com" required />
+		<div class="w-full max-w-lg pt-2">
 			<button type="submit" class="btn btn-primary w-full">Request Password Reset</button>
 		</div>
 		{#if form?.success}
-			<div class="alert alert-success shadow-lg w-full max-w-md">
-				<div>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="stroke-current flex-shrink-0 h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-						/></svg
-					>
-
-					<span>An email to reset your password has been sent</span>
-				</div>
-			</div>
+			<Alert type="success">An email to reset your password has been sent</Alert>
 		{/if}
 	</form>
 </div>
