@@ -49,10 +49,11 @@
 		action="?/updateProfile"
 		method="POST"
 		enctype="multipart/form-data"
-		class="flex flex-col space-y-2 w-full"
+		class="flex flex-col w-full"
 		use:enhance={submitUpdateProfile}
 	>
 		<h3 class="text-2xl font-medium">Update Profile</h3>
+		<div class="divider" />
 		<div class="form-control w-full max-w-lg">
 			<label for="avatar" class="label font-medium pb-1">
 				<span class="label-text">Profile Picture</span>
