@@ -1,6 +1,6 @@
 import { serializeNonPOJOs } from '$lib/utils';
 
-/** @type {import('./$types').PageLoad} */
+/** @type {import('../my/budgetbooks/$types').PageLoad} */
 export async function load({ locals }) {
 	try {
 		const results = await locals.pb.collection('budgetbooks').getFullList(200, {
